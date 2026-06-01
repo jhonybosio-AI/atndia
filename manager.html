@@ -276,8 +276,8 @@
     </div>
     
     <div class="drawer-header" style="border-top: 1px solid var(--border); border-bottom: none; background: rgba(0,0,0,0.1); padding: 20px 30px;">
-      <a href="https://wa.me/5516996045700?text=Olá Jhony! Testei o painel do ATNDIA Manager e quero ativar o plano na minha loja de carros!" target="_blank" class="btn btn-primary" style="width: 100%; text-decoration: none; display: flex; justify-content: center; gap: 8px;">
-        <span>Assumir Lead no WhatsApp Comercial</span>
+      <a href="https://wa.me/5516996045700?text=Gostaria%20de%20ativar%20o%20plano%20do%20ATNDIA%20na%20minha%20loja!" target="_blank" class="btn btn-primary" style="width: 100%; text-decoration: none; display: flex; justify-content: center; gap: 8px;">
+        <span>Ativar Plano no WhatsApp Comercial</span>
         <span>➔</span>
       </a>
     </div>
@@ -285,8 +285,36 @@
 
   <!-- 11. Banco de Dados de Simulação (Javascript Embutido) -->
   <script>
-    // 1. Dados Reais de Carros Importados (Recorde Veículos em HD)
+    // 1. Dados Reais de Carros Importados (Estoque da XCarros do Davi em HD)
     const estoqueRecordeVeiculos = [
+      {
+        id: "2485663",
+        marca: "TOYOTA",
+        modelo: "Corolla Altis Hybrid (ID 997)",
+        ano: "2023",
+        cor: "Branco",
+        valor: "R$ 149.900,00",
+        km: "69.000 Km",
+        combustivel: "Híbrido",
+        foto: "https://s3.agsistema.net/1673/vehicles/2485663/photos/GwJMftGwC3Z4A4Mqu3GFdgzyQp7MNbzj.jpg?partner=carrobauru",
+        fotos: [
+          "https://s3.agsistema.net/1673/vehicles/2485663/photos/GwJMftGwC3Z4A4Mqu3GFdgzyQp7MNbzj.jpg?partner=carrobauru"
+        ]
+      },
+      {
+        id: "2366869",
+        marca: "RENAULT",
+        modelo: "Kwid Intense (ID 3945)",
+        ano: "2024",
+        cor: "Azul",
+        valor: "R$ 57.900,00",
+        km: "67.000 Km",
+        combustivel: "Flex",
+        foto: "https://s3.agsistema.net/1673/vehicles/2366869/photos/XY8DFmfo9R5l2QpWUXssmQZl6gOim0pn.jpg?partner=carrobauru",
+        fotos: [
+          "https://s3.agsistema.net/1673/vehicles/2366869/photos/XY8DFmfo9R5l2QpWUXssmQZl6gOim0pn.jpg?partner=carrobauru"
+        ]
+      },
       {
         id: "1615095",
         marca: "VW VOLKSWAGEN",
@@ -298,80 +326,49 @@
         combustivel: "Gasolina",
         foto: "https://cdn.shopcar.com.br/stored/veiculos/1779126742_76197.jpg",
         fotos: [
-          "https://cdn.shopcar.com.br/stored/veiculos/1779126742_76197.jpg",
-          "https://cdn.shopcar.com.br/stored/veiculos/1779126742_84062.jpg",
-          "https://cdn.shopcar.com.br/stored/veiculos/1779126742_92155.jpg"
+          "https://cdn.shopcar.com.br/stored/veiculos/1779126742_76197.jpg"
         ]
       },
       {
-        id: "1562377",
-        marca: "VW VOLKSWAGEN",
-        modelo: "Amarok Highline 2.0TDi 4x4 C.D. A/T",
-        ano: "13/14",
+        id: "2724",
+        marca: "HONDA",
+        modelo: "Civic LXS 1.8 (ID 2724)",
+        ano: "2013",
         cor: "Prata",
-        valor: "R$ 83.900,00",
-        km: "221.600 Km",
-        combustivel: "Diesel",
+        valor: "R$ 57.900,00",
+        km: "288.000 Km",
+        combustivel: "Flex",
         foto: "https://cdn.shopcar.com.br/stored/veiculos/1763559399_47856.jpg",
         fotos: [
-          "https://cdn.shopcar.com.br/stored/veiculos/1763559399_47856.jpg",
-          "https://cdn.shopcar.com.br/stored/veiculos/1763559399_55831.jpg"
+          "https://cdn.shopcar.com.br/stored/veiculos/1763559399_47856.jpg"
         ]
       },
       {
-        id: "1611158",
-        marca: "GM CHEVROLET",
-        modelo: "Celta LT 1.0 4p.",
-        ano: "13/14",
-        cor: "Preta",
-        valor: "R$ 32.900,00",
-        km: "123.000 Km",
+        id: "3290",
+        marca: "CHEVROLET",
+        modelo: "Tracker Premier Turbo (ID 3290)",
+        ano: "2024",
+        cor: "Vermelho",
+        valor: "R$ 84.900,00",
+        km: "12.000 Km",
         combustivel: "Flex",
-        foto: "https://cdn.shopcar.com.br/stored/veiculos/1778076195_30336.jpg",
-        fotos: [
-          "https://cdn.shopcar.com.br/stored/veiculos/1778076195_30336.jpg"
-        ]
-      },
-      {
-        id: "1596943",
-        marca: "SUZUKI",
-        modelo: "DL 650 V-Strom",
-        ano: "12/13",
-        cor: "Laranja",
-        valor: "R$ 30.900,00",
-        km: "90.000 Km",
-        combustivel: "Gasolina",
-        foto: "https://cdn.shopcar.com.br/stored/veiculos/1770020144_93281.jpg",
-        fotos: [
-          "https://cdn.shopcar.com.br/stored/veiculos/1770020144_93281.jpg"
-        ]
-      },
-      {
-        id: "1614013",
-        marca: "BMW",
-        modelo: "F 850 GS Adv. Premium",
-        ano: "22/22",
-        cor: "Preta",
-        valor: "R$ 67.900,00",
-        km: "15.000 Km",
-        combustivel: "Gasolina",
         foto: "https://cdn.shopcar.com.br/stored/veiculos/1777610091_29013.jpg",
         fotos: [
           "https://cdn.shopcar.com.br/stored/veiculos/1777610091_29013.jpg"
         ]
       },
       {
-        id: "1609188",
-        marca: "HONDA",
-        modelo: "HR-V LX 1.8 16v A/T",
-        ano: "16/16",
-        cor: "Cinza",
-        valor: "R$ 78.900,00",
-        km: "115.000 Km",
+        id: "4297",
+        marca: "FIAT",
+        modelo: "Toro Freedom 1.3 Turbo (ID 4297)",
+        ano: "2023",
+        cor: "Vermelho",
+        valor: "R$ 119.000,00",
+        km: "28.000 Km",
         combustivel: "Flex",
-        foto: "https://cdn.shopcar.com.br/stored/veiculos/1777609212_18029.jpg",
+        foto: "https://cdn.shopcar.com.br/stored/veiculos/1770020144_93281.jpg",
         fotos: [
-          "https://cdn.shopcar.com.br/stored/veiculos/1777609212_18029.jpg"
+          "https://cdn.shopcar.com.br/stored/veiculos/1770020144_93281.jpg"
         ]
       }
     ];
@@ -566,7 +563,7 @@
         { p: 15, msg: "Conectando ao barramento principal do portal ShopCar...", time: 600 },
         { p: 35, msg: "Identificando catálogo e links dos veículos...", time: 1300 },
         { p: 55, msg: "Varrendo e parseando especificações de 17 veículos...", time: 2100 },
-        { p: 70, msg: "Extraindo galeria HD de fotos da Recorde Veículos...", time: 2900 },
+        { p: 70, msg: "Extraindo galeria HD de fotos da loja do cliente...", time: 2900 },
         { p: 90, msg: "Convertendo e otimizando imagens de miniatura para resolução HD...", time: 3700 },
         { p: 100, msg: "Estoque sincronizado e ativado em produção com sucesso!", time: 4500 }
       ];

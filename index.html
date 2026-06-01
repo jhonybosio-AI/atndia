@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ATNDIA — Sua loja atendendo antes do cliente esfriar. Assistente comercial por IA para lojas de carros que querem vender melhor sem deixar lead parado.">
+  <title>ATNDIA — Sua loja atendendo antes do cliente esfriar.</title>
+  
+  <!-- Fontes Oficiais do Design System (Space Grotesk, Plus Jakarta Sans, Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Folha de Estilos -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Favicon Simplificado -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230b0f14%22/><text y=%2265%22 x=%2210%22 font-size=%2244%22 font-weight=%22800%22 fill=%22%23ffffff%22 font-family=%22'Space Grotesk',sans-serif%22>ATND</text><text y=%2265%22 x=%2260%22 font-size=%2244%22 font-weight=%22800%22 fill=%22%232563eb%22 font-family=%22'Space Grotesk',sans-serif%22>IA</text></svg>">
+</head>
+<body>
+
+  <!-- Background Gradients e Vinheta -->
+  <div class="vinheta"></div>
+  <div class="glow-backface blue"></div>
+  <div class="glow-backface green"></div>
+
+  <!-- Cabeçalho (Header Glassmorphic) -->
+  <header id="main-header">
+    <div class="header-container">
+      <div class="logo">
+        <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ícone: Balão de conversa + Farol / Movimento -->
+          <path d="M21 11.5C21 15.6421 17.1944 19 12.5 19C10.8711 19 9.35624 18.5929 8.08386 17.8863L3 19.5L4.57018 14.8192C3.57864 13.8821 3 12.7386 3 11.5C3 7.35786 6.80558 4 11.5 4C16.1944 4 21 7.35786 21 11.5Z" fill="#1f2937" stroke="#2563eb" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="9.5" cy="11.5" r="1.5" fill="#22c55e" />
+          <circle cx="14.5" cy="11.5" r="1.5" fill="#22c55e" />
+        </svg>
+        <span class="logo-text">ATND<span class="ia-accent">IA</span></span>
+      </div>
+      <nav class="nav-links">
+        <a href="#problema">O Desafio</a>
+        <a href="#solucao">Solução</a>
+        <a href="#como-funciona">Funcionamento</a>
+        <a href="#modulos">Módulos</a>
+        <a href="#beneficios">Benefícios</a>
+      </nav>
+      <div class="header-cta">
+        <a href="https://wa.me/5516996045700?text=Quero%20uma%20demonstracao%20do%20ATNDIA" class="btn btn-sm btn-outline">Demonstração</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Topo / Hero Section -->
+  <section class="hero-section">
+    <div class="section-container hero-grid">
+      <!-- Lado Esquerdo: Posicionamento Principal -->
+      <div class="hero-content">
+        <span class="badge">ASSISTENTE COMERCIAL POR IA</span>
+        <h1 id="hero-title" class="glow-text-blue">Sua loja atendendo antes do cliente esfriar.</h1>
+        <p class="hero-subtitle">A plataforma de atendimento por IA para lojas de carros que querem responder mais rápido, qualificar melhor os leads e transformar conversas em oportunidades reais de venda.</p>
+        <p class="hero-desc-sec">A ATNDIA atende clientes no WhatsApp, site e redes sociais, entende o interesse de compra, coleta informações importantes e entrega o lead qualificado pronto para o vendedor continuar a negociação.</p>
+        
+        <div class="hero-actions">
+          <a href="https://wa.me/5516996045700?text=Quero%20uma%20demonstracao%20do%20ATNDIA" class="btn btn-lg btn-primary glow-button-gold">
+            Quero testar na minha loja
+            <span class="sub-text">Falar com Especialista ➔</span>
+          </a>
+        </div>
+        
+        <div class="hero-proof">
+          <div class="proof-item">
+            <span class="proof-num">0s</span>
+            <span class="proof-label">Tempo de resposta</span>
+          </div>
+          <div class="proof-item">
+            <span class="proof-num">24h</span>
+            <span class="proof-label">Atendimento ativo</span>
+          </div>
+          <div class="proof-item">
+            <span class="proof-num">100%</span>
+            <span class="proof-label">Leads respondidos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lado Direito: Celular com o Chat em Ação -->
+      <div class="hero-visual">
+        <div class="phone-wrapper">
+          <object type="image/svg+xml" data="conversas_mockup.svg" class="phone-svg" aria-label="Mockup do atendimento inteligente ATNDIA"></object>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 2: O Problema -->
+  <section id="problema" class="problem-section">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="badge badge-error">O DESAFIO REAL</span>
+        <h2>Você paga caro para gerar lead. Não deixe ele esfriar por falta de atendimento.</h2>
+        <p class="section-subtitle">Sua loja investe em anúncios, recebe contatos diariamente, mas perde oportunidades valiosas por pequenas falhas no atendimento?</p>
+      </div>
+
+      <div class="grid-problems">
+        <!-- Item 1 -->
+        <div class="card-problem">
+          <span class="problem-icon">🌙</span>
+          <h4>Clientes chamam fora do horário</h4>
+          <p>Mais de 40% dos interessados mandam mensagem à noite ou no final de semana, ficando horas sem resposta.</p>
+        </div>
+        <!-- Item 2 -->
+        <div class="card-problem">
+          <span class="problem-icon">⏳</span>
+          <h4>Vendedor ocupado</h4>
+          <p>Sua equipe está fazendo test-drive ou fechando contrato e não consegue responder na hora quem acabou de chegar.</p>
+        </div>
+        <!-- Item 3 -->
+        <div class="card-problem">
+          <span class="problem-icon">❓</span>
+          <h4>Lead sem informação</h4>
+          <p>Muitos contatos chegam confusos. O vendedor perde tempo fazendo perguntas básicas antes de qualificar o interesse.</p>
+        </div>
+        <!-- Item 4 -->
+        <div class="card-problem">
+          <span class="problem-icon">❄️</span>
+          <h4>A conversa esfria</h4>
+          <p>O tempo médio de tolerância de um lead no WhatsApp é de 5 minutos. Passou disso, a atenção dele já mudou de foco.</p>
+        </div>
+        <!-- Item 5 -->
+        <div class="card-problem">
+          <span class="problem-icon">🏃</span>
+          <h4>A venda vai para outra loja</h4>
+          <p>Se a sua loja demora para responder sobre o estoque, o cliente simplesmente clica no anúncio do concorrente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 3: A Solução -->
+  <section id="solucao" class="solution-section text-center">
+    <div class="section-container card-glass solution-box">
+      <span class="badge badge-success">A SOLUÇÃO</span>
+      <h2 class="glow-text-blue">A ATNDIA responde na hora, entende o que o cliente procura e organiza o atendimento para seu time.</h2>
+      <p class="solution-desc">Ela não substitui o vendedor humano. Ela prepara o cliente para o vendedor fechar o negócio com muito mais assertividade.</p>
+      
+      <div class="solution-divider"></div>
+      
+      <p class="solution-example">
+        <strong>Identidade Verbal na Prática:</strong><br>
+        "Seu cliente chamou no WhatsApp às 22h. A ATNDIA respondeu, qualificou, entendeu o carro de interesse e deixou tudo pronto para seu vendedor assumir no dia seguinte."
+      </p>
+    </div>
+  </section>
+
+  <!-- Seção 4: Como Funciona -->
+  <section id="como-funciona" class="how-it-works-section">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="badge">NA PRÁTICA</span>
+        <h2>Como o ATNDIA funciona?</h2>
+      </div>
+
+      <div class="steps-container">
+        <!-- Passo 1 -->
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h3 class="step-title">O cliente chama</h3>
+          <p class="step-text">Ele inicia o contato pelo WhatsApp, site ou rede social, buscando informações sobre algum carro.</p>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h3 class="step-title">IA responde na hora</h3>
+          <p class="step-text">A ATNDIA responde com linguagem natural em segundos, com o tom de voz comercial e simpático da sua loja.</p>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h3 class="step-title">Qualificação inteligente</h3>
+          <p class="step-text">A IA identifica o interesse, orçamento, carros para troca, intenção de financiamento e urgência da compra.</p>
+        </div>
+
+        <!-- Passo 4 -->
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <h3 class="step-title">Lead pronto pro vendedor</h3>
+          <p class="step-text">O lead é enviado diretamente para a equipe de vendas com um resumo estruturado de toda a conversa inicial.</p>
+        </div>
+
+        <!-- Passo 5 -->
+        <div class="step-card">
+          <div class="step-num">05</div>
+          <h3 class="step-title">Painel do proprietário</h3>
+          <p class="step-text">Como dono da loja, você acompanha o funil completo, volume de leads e taxas de agendamento em tempo real.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 5: Os Módulos da Plataforma -->
+  <section id="modulos" class="modules-section">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="badge badge-accent">MÓDULOS DE PRODUTO</span>
+        <h2 class="glow-text-gold">Uma estrutura de atendimento completa para a sua loja</h2>
+        <p class="section-subtitle">Módulos especializados que cobrem desde a captura inicial do lead até o acompanhamento pós-visita.</p>
+      </div>
+
+      <div class="grid-modules">
+        <!-- Módulo 1 -->
+        <div class="card-glass">
+          <div class="module-header">
+            <span class="module-tag">MODULO</span>
+            <h3>ATNDIA Lead</h3>
+          </div>
+          <p class="card-text">Capta e qualifica os interessados no segundo em que chegam, coletando dados essenciais de contato e orçamento.</p>
+        </div>
+        <!-- Módulo 2 -->
+        <div class="card-glass">
+          <div class="module-header">
+            <span class="module-tag">MODULO</span>
+            <h3>ATNDIA Showroom</h3>
+          </div>
+          <p class="card-text">Apresenta o estoque da loja de forma interativa, fornecendo fotos, versões, preços, condições e opcionais na hora.</p>
+        </div>
+        <!-- Módulo 3 -->
+        <div class="card-glass">
+          <div class="module-header">
+            <span class="module-tag">MODULO</span>
+            <h3>ATNDIA Vendas</h3>
+          </div>
+          <p class="card-text">Organiza as informações obtidas e prepara o cliente de forma ideal, entregando o lead altamente inclinado à compra.</p>
+        </div>
+        <!-- Módulo 4 -->
+        <div class="card-glass">
+          <div class="module-header">
+            <span class="module-tag">MODULO</span>
+            <h3>ATNDIA Follow-up</h3>
+          </div>
+          <p class="card-text">Recupera leads antigos e reengaja clientes que pararam de responder, mantendo o relacionamento aquecido.</p>
+        </div>
+        <!-- Módulo 5 -->
+        <div class="card-glass">
+          <div class="module-header">
+            <span class="module-tag">MODULO</span>
+            <h3>ATNDIA Agenda</h3>
+          </div>
+          <p class="card-text">Marca visitas presenciais, test-drives e horários de retorno sem precisar de intervenção manual da equipe.</p>
+        </div>
+        <!-- Módulo 6 -->
+        <div class="card-glass">
+          <div class="module-header">
+            <span class="module-tag">MODULO</span>
+            <h3>ATNDIA Manager</h3>
+          </div>
+          <p class="card-text">Dashboard completo para o dono da loja acompanhar a performance de anúncios, conversões e o trabalho dos vendedores.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 6: Benefícios -->
+  <section id="beneficios" class="benefits-section">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="badge">VANTAGENS COMERCIAIS</span>
+        <h2>Menos lead perdido. Mais atendimento com padrão.</h2>
+      </div>
+
+      <div class="grid-benefits">
+        <div class="benefit-item">
+          <span class="benefit-check">✓</span>
+          <div>
+            <h4>Atendimento 24 horas</h4>
+            <p>Sua loja ativa e respondendo mesmo de madrugada e nos finais de semana.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-check">✓</span>
+          <div>
+            <h4>Mais velocidade no primeiro contato</h4>
+            <p>Redução do tempo de resposta para menos de 5 segundos, aumentando o engajamento.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-check">✓</span>
+          <div>
+            <h4>Menos leads esquecidos</h4>
+            <p>Garantia de que 100% dos clientes que chamarem receberão uma resposta profissional.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-check">✓</span>
+          <div>
+            <h4>Mais padrão comercial</h4>
+            <p>Atendimento padronizado, educado e focado na condução para a venda.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-check">✓</span>
+          <div>
+            <h4>Melhor aproveitamento dos anúncios</h4>
+            <p>Pare de queimar dinheiro em tráfego pago para leads que esfriam na caixa de entrada.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-check">✓</span>
+          <div>
+            <h4>Vendedores focados em fechar</h4>
+            <p>Sua equipe gasta energia apenas com quem já foi triado e realmente tem interesse comercial.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-check">✓</span>
+          <div>
+            <h4>Dono da loja com visão clara do funil</h4>
+            <p>Acompanhamento exato das métricas e da satisfação dos clientes no painel gestor.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Call to Action Final -->
+  <section class="cta-final-section">
+    <div class="section-container card-glass cta-box text-center">
+      <span class="badge badge-accent">AVALIAÇÃO GRATUITA</span>
+      <h2 class="glow-text-gold">Coloque uma IA para atender os leads da sua loja</h2>
+      <p class="cta-subtitle">Pare de queimar dinheiro com anúncios e leads que esfriam sem retorno. Comece a automatizar o primeiro atendimento hoje mesmo.</p>
+      
+      <div class="cta-actions">
+        <a href="https://wa.me/5516996045700?text=Quero%20uma%20demonstracao%20do%20ATNDIA" class="btn btn-lg btn-primary glow-button-gold">
+          Quero conhecer a ATNDIA
+          <span class="sub-text">Simular atendimento no WhatsApp ➔</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer id="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="logo">
+          <svg class="logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 11.5C21 15.6421 17.1944 19 12.5 19C10.8711 19 9.35624 18.5929 8.08386 17.8863L3 19.5L4.57018 14.8192C3.57864 13.8821 3 12.7386 3 11.5C3 7.35786 6.80558 4 11.5 4C16.1944 4 21 7.35786 21 11.5Z" fill="#1f2937" stroke="#2563eb" stroke-width="2" stroke-linejoin="round"/>
+            <circle cx="9.5" cy="11.5" r="1.5" fill="#22c55e" />
+            <circle cx="14.5" cy="11.5" r="1.5" fill="#22c55e" />
+          </svg>
+          <span class="logo-text">ATND<span class="ia-accent">IA</span></span>
+        </div>
+        <p class="footer-tagline">Assistente comercial por inteligência artificial para concessionárias e lojas multimarcas.</p>
+      </div>
+      <div class="footer-links">
+        <span class="footer-signature">Jhony Bosio</span>
+      </div>
+    </div>
+    <div class="footer-bottom text-center">
+      <p>&copy; 2026 ATNDIA. Todos os direitos reservados. Design System Blue3.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

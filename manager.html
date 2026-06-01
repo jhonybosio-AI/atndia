@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ATNDIA Manager — Dashboard de Gestão de Performance e Onboarding por IA">
+  <title>ATNDIA Manager — Painel Gestor de Performance Comercial</title>
+  
+  <!-- Fontes Oficiais do Design System -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="manager.css">
+</head>
+<body>
+
+  <!-- Vinheta de Fundo -->
+  <div class="vinheta-dashboard"></div>
+
+  <!-- Cabeçalho Principal (Glassmorphic) -->
+  <header id="dashboard-header">
+    <div class="header-container">
+      <div class="brand-section">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 15.6421 17.1944 19 12.5 19C10.8711 19 9.35624 18.5929 8.08386 17.8863L3 19.5L4.57018 14.8192C3.57864 13.8821 3 12.7386 3 11.5C3 7.35786 6.80558 4 11.5 4C16.1944 4 21 7.35786 21 11.5Z" fill="#1f2937" stroke="#2563eb" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="9.5" cy="11.5" r="1.5" fill="#22c55e" />
+          <circle cx="14.5" cy="11.5" r="1.5" fill="#22c55e" />
+        </svg>
+        <span class="logo-text">ATND<span class="logo-accent">IA</span> <span style="font-size: 13px; font-weight: 500; opacity: 0.65; margin-left: 5px;">Manager</span></span>
+      </div>
+      
+      <div class="server-status">
+        <div class="status-dot"></div>
+        <span>SERVIDOR CORE ACTIVE</span>
+      </div>
+      
+      <div class="user-profile">
+        <div class="user-avatar">JB</div>
+        <div class="user-info">
+          <span class="user-name">Jhony Bosio</span>
+          <span class="user-role">Proprietário</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Wrapper do Dashboard -->
+  <div class="dashboard-wrapper">
+    
+    <!-- Seção 1: Top KPIs -->
+    <div class="metrics-grid">
+      <!-- KPI 1 -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title">Leads Triados (Mês)</span>
+          <span class="metric-icon">👥</span>
+        </div>
+        <span class="metric-value" id="kpi-leads">1.492</span>
+        <div class="metric-trend up">
+          <span>▲ 18.4%</span>
+          <span style="color: var(--text-dimmed); font-weight: normal;">vs mês anterior</span>
+        </div>
+      </div>
+      <!-- KPI 2 -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title">Conversas Ativas (24h)</span>
+          <span class="metric-icon">💬</span>
+        </div>
+        <span class="metric-value" id="kpi-conversas">84</span>
+        <div class="metric-trend up">
+          <span>▲ 8.1%</span>
+          <span style="color: var(--text-dimmed); font-weight: normal;">tempo médio: 4s</span>
+        </div>
+      </div>
+      <!-- KPI 3 -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title">Fichas de Financiamento</span>
+          <span class="metric-icon">💳</span>
+        </div>
+        <span class="metric-value" id="kpi-fichas">37</span>
+        <div class="metric-trend up">
+          <span>▲ 12.5%</span>
+          <span style="color: var(--text-dimmed); font-weight: normal;">leads com CPF coletado</span>
+        </div>
+      </div>
+      <!-- KPI 4 -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title">Horas Vendedoras Salvas</span>
+          <span class="metric-icon">⏳</span>
+        </div>
+        <span class="metric-value" id="kpi-horas">124h</span>
+        <div class="metric-trend neutral">
+          <span>● Estável</span>
+          <span style="color: var(--text-dimmed); font-weight: normal;">horas salvas em triagem</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção 2: Grid Principal -->
+    <div class="main-dashboard-grid">
+      
+      <!-- Coluna da Esquerda: Controles, Scraper e Estoque -->
+      <div class="dashboard-panel">
+        <div class="panel-header">
+          <span class="panel-badge">ONBOARDING INSTANTÂNEO</span>
+          <h2 class="panel-title">Integração de Estoque por IA</h2>
+          <p class="panel-desc">Digite o link de anúncios do ShopCar do lojista. O sistema fará a varredura do catálogo e gerará a base HD em tempo real.</p>
+        </div>
+        
+        <div class="scraper-control-box">
+          <div class="input-group">
+            <input type="text" class="scraper-input" id="shopcar-url" value="https://www.shopcar.com.br/loja.php?id=931" placeholder="Insira o link da loja do ShopCar...">
+            <button class="btn btn-primary" id="btn-scraper" onclick="iniciarSimulacaoScraper()">
+              <span>Importar Estoque</span>
+              <span>⚡</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Progress Loader -->
+        <div class="progress-container" id="scraper-progress">
+          <div class="progress-bar-wrapper">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
+          <div class="progress-label">
+            <span id="progress-status">Preparando conexão...</span>
+            <span id="progress-percent">0%</span>
+          </div>
+        </div>
+        
+        <!-- Console de Logs -->
+        <div class="console-box" id="console-logs">
+          <div class="log-line">
+            <span class="log-timestamp">[16:20:01]</span>
+            <span class="log-text info">Console inicializado. Aguardando comando de onboarding...</span>
+          </div>
+        </div>
+        
+        <!-- Grid de Carros Importados -->
+        <div class="imported-stock-wrapper" id="stock-wrapper">
+          <div class="stock-grid-header">
+            <span class="panel-badge gold">ESTOQUE ATIVO EM PRODUÇÃO</span>
+            <span class="stock-count">17 VEÍCULOS HD CARREGADOS</span>
+          </div>
+          
+          <div class="stock-grid" id="stock-grid-container">
+            <!-- Inserido dinamicamente via JS -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Coluna da Direita: Leads Recentes e Smartphone de Conversa -->
+      <div class="dashboard-panel" style="gap: 20px;">
+        <div class="panel-header">
+          <span class="panel-badge">CENTRAL DE OPORTUNIDADES</span>
+          <h2 class="panel-title">Leads Recentes & Fichas de Crédito</h2>
+          <p class="panel-desc">Abaixo estão os leads mais quentes triados pelo ATNDIA. Clique na linha de um lead para ver o histórico e a ficha de crédito.</p>
+        </div>
+        
+        <div class="leads-table-container">
+          <table class="leads-table">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Carro</th>
+                <th>Status Triagem</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody id="leads-tbody">
+              <!-- Inserido via JS -->
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="phone-simulation-container">
+          <div class="smartphone">
+            <div class="phone-header">
+              <span class="phone-back">‹</span>
+              <div class="phone-avatar">AV</div>
+              <div class="phone-user-info">
+                <span class="phone-user-name" id="chat-loja-name">Atndia Veículos</span>
+                <span class="phone-user-status">
+                  <span class="phone-status-dot"></span>
+                  <span>online</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="phone-chat-screen" id="phone-chat-screen">
+              <div class="phone-msg-bubble received">
+                Olá! Sou o assistente virtual da <b>Atndia Veículos</b> 🚘. Como posso te ajudar a encontrar seu próximo carro hoje?
+                <div class="phone-msg-time">16:00</div>
+              </div>
+            </div>
+            
+            <!-- Typing Indicator -->
+            <div class="phone-typing-indicator" id="phone-typing">
+              <div class="typing-dots">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Botões Rápidos do Chat Simulator -->
+          <div class="simulation-actions-box">
+            <span class="phone-user-status" style="color: var(--text-dimmed); text-transform: uppercase; font-size: 10px; margin-bottom: 5px; font-weight: 700; letter-spacing: 0.05em;">Clique nas perguntas para simular o cliente:</span>
+            <button class="sim-btn" onclick="simularMensagemCliente('Vocês têm algum Fusca?')">Vocês têm algum Fusca?</button>
+            <button class="sim-btn" onclick="simularMensagemCliente('Quero ver as fotos dele!')">Quero ver as fotos dele!</button>
+            <button class="sim-btn" onclick="simularMensagemCliente('Qual o preço e km da Amarok?')">Qual o preço e km da Amarok?</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Gaveta Lateral (Lead Details Drawer) -->
+  <div class="lead-drawer-overlay" id="drawer-overlay" onclick="fecharGavetaLead()"></div>
+  <div class="lead-drawer" id="lead-drawer">
+    <div class="drawer-header">
+      <div>
+        <h3 class="panel-title" id="drawer-lead-name">João Silva</h3>
+        <p class="panel-desc" id="drawer-lead-phone">+55 16 99311-5079</p>
+      </div>
+      <button class="drawer-close" onclick="fecharGavetaLead()">×</button>
+    </div>
+    
+    <div class="drawer-content">
+      <!-- Ficha de Crédito -->
+      <div>
+        <span class="drawer-section-title">Ficha de Crédito Inteligente</span>
+        <div class="credit-file-box">
+          <div class="credit-grid">
+            <div class="credit-item">
+              <span class="credit-label">Carro de Interesse</span>
+              <span class="credit-value highlight" id="drawer-credit-car">Fusca 1600 (1976)</span>
+            </div>
+            <div class="credit-item">
+              <span class="credit-label">Intenção de Compra</span>
+              <span class="credit-value">Financiamento Bancário</span>
+            </div>
+            <div class="credit-item">
+              <span class="credit-label">CPF Coletado</span>
+              <span class="credit-value" id="drawer-credit-cpf">123.456.789-00</span>
+            </div>
+            <div class="credit-item">
+              <span class="credit-label">Nascimento</span>
+              <span class="credit-value" id="drawer-credit-birth">12/04/1984</span>
+            </div>
+            <div class="credit-item">
+              <span class="credit-label">Entrada Planejada</span>
+              <span class="credit-value highlight" id="drawer-credit-downpayment">R$ 10.000,00</span>
+            </div>
+            <div class="credit-item">
+              <span class="credit-label">Carro na Troca?</span>
+              <span class="credit-value" id="drawer-credit-tradein">Não (Sem carro na troca)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Histórico de Conversa -->
+      <div>
+        <span class="drawer-section-title">Histórico de Triagem da IA</span>
+        <div class="chat-log-box" id="drawer-chat-log">
+          <!-- Inserido dinamicamente via JS -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="drawer-header" style="border-top: 1px solid var(--border); border-bottom: none; background: rgba(0,0,0,0.1); padding: 20px 30px;">
+      <a href="https://wa.me/5516996045700?text=Olá Jhony! Testei o painel do ATNDIA Manager e quero ativar o plano na minha loja de carros!" target="_blank" class="btn btn-primary" style="width: 100%; text-decoration: none; display: flex; justify-content: center; gap: 8px;">
+        <span>Assumir Lead no WhatsApp Comercial</span>
+        <span>➔</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 11. Banco de Dados de Simulação (Javascript Embutido) -->
+  <script>
+    // 1. Dados Reais de Carros Importados (Recorde Veículos em HD)
+    const estoqueRecordeVeiculos = [
+      {
+        id: "1615095",
+        marca: "VW VOLKSWAGEN",
+        modelo: "Fusca 1600",
+        ano: "76/76",
+        cor: "Branca",
+        valor: "R$ 34.900,00",
+        km: "94.000 Km",
+        combustivel: "Gasolina",
+        foto: "https://cdn.shopcar.com.br/stored/veiculos/1779126742_76197.jpg",
+        fotos: [
+          "https://cdn.shopcar.com.br/stored/veiculos/1779126742_76197.jpg",
+          "https://cdn.shopcar.com.br/stored/veiculos/1779126742_84062.jpg",
+          "https://cdn.shopcar.com.br/stored/veiculos/1779126742_92155.jpg"
+        ]
+      },
+      {
+        id: "1562377",
+        marca: "VW VOLKSWAGEN",
+        modelo: "Amarok Highline 2.0TDi 4x4 C.D. A/T",
+        ano: "13/14",
+        cor: "Prata",
+        valor: "R$ 83.900,00",
+        km: "221.600 Km",
+        combustivel: "Diesel",
+        foto: "https://cdn.shopcar.com.br/stored/veiculos/1763559399_47856.jpg",
+        fotos: [
+          "https://cdn.shopcar.com.br/stored/veiculos/1763559399_47856.jpg",
+          "https://cdn.shopcar.com.br/stored/veiculos/1763559399_55831.jpg"
+        ]
+      },
+      {
+        id: "1611158",
+        marca: "GM CHEVROLET",
+        modelo: "Celta LT 1.0 4p.",
+        ano: "13/14",
+        cor: "Preta",
+        valor: "R$ 32.900,00",
+        km: "123.000 Km",
+        combustivel: "Flex",
+        foto: "https://cdn.shopcar.com.br/stored/veiculos/1778076195_30336.jpg",
+        fotos: [
+          "https://cdn.shopcar.com.br/stored/veiculos/1778076195_30336.jpg"
+        ]
+      },
+      {
+        id: "1596943",
+        marca: "SUZUKI",
+        modelo: "DL 650 V-Strom",
+        ano: "12/13",
+        cor: "Laranja",
+        valor: "R$ 30.900,00",
+        km: "90.000 Km",
+        combustivel: "Gasolina",
+        foto: "https://cdn.shopcar.com.br/stored/veiculos/1770020144_93281.jpg",
+        fotos: [
+          "https://cdn.shopcar.com.br/stored/veiculos/1770020144_93281.jpg"
+        ]
+      },
+      {
+        id: "1614013",
+        marca: "BMW",
+        modelo: "F 850 GS Adv. Premium",
+        ano: "22/22",
+        cor: "Preta",
+        valor: "R$ 67.900,00",
+        km: "15.000 Km",
+        combustivel: "Gasolina",
+        foto: "https://cdn.shopcar.com.br/stored/veiculos/1777610091_29013.jpg",
+        fotos: [
+          "https://cdn.shopcar.com.br/stored/veiculos/1777610091_29013.jpg"
+        ]
+      },
+      {
+        id: "1609188",
+        marca: "HONDA",
+        modelo: "HR-V LX 1.8 16v A/T",
+        ano: "16/16",
+        cor: "Cinza",
+        valor: "R$ 78.900,00",
+        km: "115.000 Km",
+        combustivel: "Flex",
+        foto: "https://cdn.shopcar.com.br/stored/veiculos/1777609212_18029.jpg",
+        fotos: [
+          "https://cdn.shopcar.com.br/stored/veiculos/1777609212_18029.jpg"
+        ]
+      }
+    ];
+
+    // 2. Dados de Leads Triados Reais
+    const leadsData = [
+      {
+        id: 1,
+        nome: "João Silva",
+        telefone: "+55 16 99311-5079",
+        carro: "Fusca 1600",
+        ano: "1976",
+        status: "Ficha Pré-Aprovada",
+        statusClass: "hot",
+        data: "Hoje, 15:10",
+        cpf: "123.456.789-00",
+        nascimento: "12/04/1984",
+        entrada: "R$ 10.000,00",
+        troca: "Não (Sem carro de troca)",
+        conversa: [
+          { role: "customer", text: "Olá, vi o anúncio do Fusca de vocês!" },
+          { role: "bot", text: "Olá! Sou o assistente da Atndia Veículos. Temos sim! Fusca 1600, 76/76, Branco, 94.000km por R$ 34.900,00. Gostaria de ver algumas fotos?" },
+          { role: "customer", text: "Quero ver sim!" },
+          { role: "bot", text: "MEDIA:https://cdn.shopcar.com.br/stored/veiculos/1779126742_76197.jpg" },
+          { role: "bot", text: "Lindo demais, né? Ele é todo restaurado, placa preta em andamento. Você planeja comprar à vista ou simular um financiamento?" },
+          { role: "customer", text: "Quero simular financiamento dando 10 mil de entrada." },
+          { role: "bot", text: "Perfeito! Para eu calcular a simulação bancária de crédito agora e ver as parcelas mais baixas para você, qual seria o seu CPF e sua data de nascimento?" },
+          { role: "customer", text: "Meu CPF é 123.456.789-00 e nasci em 12/04/1984." },
+          { role: "bot", text: "Excelente, João! Coletei seus dados. Já enviei para nossa central de crédito e a pré-aprovação está pronta! Em alguns minutos um gerente humano assumirá o atendimento para formalizar." }
+        ]
+      },
+      {
+        id: 2,
+        nome: "Ana Souza",
+        telefone: "+55 67 98111-2090",
+        carro: "Chevrolet Celta LT",
+        ano: "2014",
+        status: "Aguardando CPF",
+        statusClass: "credit",
+        data: "Hoje, 14:02",
+        cpf: "Não informado pelo cliente",
+        nascimento: "Não informado",
+        entrada: "R$ 5.000,00 planejado",
+        troca: "Não",
+        conversa: [
+          { role: "customer", text: "Qual o valor de parcelas para o Celta?" },
+          { role: "bot", text: "Olá, Ana! O nosso Celta LT 1.0 2014 está anunciado por R$ 32.900,00. As parcelas variam muito de acordo com o seu perfil de crédito. Você teria um CPF para eu simular agora?" },
+          { role: "customer", text: "Vou ver se pego aqui e te passo." }
+        ]
+      },
+      {
+        id: 3,
+        nome: "Roberto Costa",
+        telefone: "+55 67 99245-1234",
+        carro: "Amarok Highline",
+        ano: "2014",
+        status: "Troca em Avaliação",
+        statusClass: "warm",
+        data: "Ontem, 18:40",
+        cpf: "Pendente",
+        nascimento: "Não informado",
+        entrada: "Carro de troca",
+        troca: "Saveiro Robust 1.6 (2018)",
+        conversa: [
+          { role: "customer", text: "Aceitam Saveiro 2018 na troca da Amarok?" },
+          { role: "bot", text: "Com certeza, Roberto! Pegamos seu carro na troca com uma avaliação excelente. Para o nosso avaliador calcular uma proposta justa e exata, poderia me mandar o KM e algumas fotos da Saveiro?" },
+          { role: "customer", text: "Ela está com 80.000km, vou tirar as fotos aqui e te envio." }
+        ]
+      },
+      {
+        id: 4,
+        nome: "Marcos Dias",
+        telefone: "+55 67 98455-9000",
+        carro: "Honda HR-V LX",
+        ano: "2016",
+        status: "Visita Agendada",
+        statusClass: "hot",
+        data: "Ontem, 16:15",
+        cpf: "987.654.321-11",
+        nascimento: "05/09/1990",
+        entrada: "R$ 20.000,00",
+        troca: "Não",
+        conversa: [
+          { role: "customer", text: "Tem como ver a HR-V pessoalmente amanhã?" },
+          { role: "bot", text: "Com certeza, Marcos! O carro está no nosso showroom principal. Podemos agendar uma visita e test-drive para amanhã. Qual horário fica melhor para você, às 14h ou às 16h?" },
+          { role: "customer", text: "As 14h está ótimo." },
+          { role: "bot", text: "Perfeito! Visita agendada para amanhã, às 14h, com o consultor Roberto. Te aguardamos!" }
+        ]
+      }
+    ];
+
+    // 3. Inicialização de Dados na Tela
+    document.addEventListener("DOMContentLoaded", () => {
+      renderLeadsTable();
+    });
+
+    function renderLeadsTable() {
+      const tbody = document.getElementById("leads-tbody");
+      tbody.innerHTML = "";
+      
+      leadsData.forEach(lead => {
+        const tr = document.createElement("tr");
+        tr.onclick = () => abrirGavetaLead(lead.id);
+        
+        tr.innerHTML = `
+          <td>
+            <div class="lead-name-box">
+              <span class="lead-name">${lead.nome}</span>
+              <span class="lead-phone">${lead.telefone}</span>
+            </div>
+          </td>
+          <td>
+            <span class="lead-car">${lead.carro}</span>
+            <div style="font-size: 11px; color: var(--text-dimmed);">${lead.ano}</div>
+          </td>
+          <td>
+            <span class="status-badge ${lead.statusClass}">${lead.status}</span>
+          </td>
+          <td style="color: var(--text-muted); font-family: var(--font-tech); font-size: 11px;">
+            ${lead.data}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // 4. Funções da Gaveta de Leads (Drawer)
+    function abrirGavetaLead(leadId) {
+      const lead = leadsData.find(l => l.id === leadId);
+      if (!lead) return;
+      
+      document.getElementById("drawer-lead-name").innerText = lead.nome;
+      document.getElementById("drawer-lead-phone").innerText = lead.telefone;
+      document.getElementById("drawer-credit-car").innerText = `${lead.carro} (${lead.ano})`;
+      document.getElementById("drawer-credit-cpf").innerText = lead.cpf;
+      document.getElementById("drawer-credit-birth").innerText = lead.nascimento;
+      document.getElementById("drawer-credit-downpayment").innerText = lead.entrada;
+      document.getElementById("drawer-credit-tradein").innerText = lead.troca;
+      
+      // Renderizar o histórico de conversa na gaveta
+      const chatLog = document.getElementById("drawer-chat-log");
+      chatLog.innerHTML = "";
+      
+      lead.conversa.forEach(msg => {
+        const bubble = document.createElement("div");
+        bubble.className = `chat-bubble ${msg.role}`;
+        
+        if (msg.text.startsWith("MEDIA:")) {
+          const imgUrl = msg.text.replace("MEDIA:", "");
+          bubble.innerHTML = `<img src="${imgUrl}" style="width: 100%; border-radius: 6px; margin-bottom: 5px;" alt="Mídia HD"><span class="phone-msg-time" style="display:block; text-align:right;">HD Foto</span>`;
+        } else {
+          bubble.innerHTML = `${msg.text}`;
+        }
+        
+        chatLog.appendChild(bubble);
+      });
+      
+      // Mostrar overlay e abrir gaveta
+      document.getElementById("drawer-overlay").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("lead-drawer").classList.add("open");
+      }, 10);
+    }
+
+    function fecharGavetaLead() {
+      document.getElementById("lead-drawer").classList.remove("open");
+      setTimeout(() => {
+        document.getElementById("drawer-overlay").style.display = "none";
+      }, 300);
+    }
+
+    // 5. Simulação do Scraper (ShopCar)
+    function iniciarSimulacaoScraper() {
+      const btn = document.getElementById("btn-scraper");
+      const input = document.getElementById("shopcar-url");
+      const progress = document.getElementById("scraper-progress");
+      const fill = document.getElementById("progress-fill");
+      const status = document.getElementById("progress-status");
+      const percent = document.getElementById("progress-percent");
+      const logs = document.getElementById("console-logs");
+      
+      btn.disabled = true;
+      input.disabled = true;
+      progress.style.display = "flex";
+      fill.style.width = "0%";
+      percent.innerText = "0%";
+      
+      logs.innerHTML = "";
+      addLog("Comando recebido. Iniciando rotina de Onboarding do estoque...", "working");
+      
+      const etapas = [
+        { p: 15, msg: "Conectando ao barramento principal do portal ShopCar...", time: 600 },
+        { p: 35, msg: "Identificando catálogo e links dos veículos...", time: 1300 },
+        { p: 55, msg: "Varrendo e parseando especificações de 17 veículos...", time: 2100 },
+        { p: 70, msg: "Extraindo galeria HD de fotos da Recorde Veículos...", time: 2900 },
+        { p: 90, msg: "Convertendo e otimizando imagens de miniatura para resolução HD...", time: 3700 },
+        { p: 100, msg: "Estoque sincronizado e ativado em produção com sucesso!", time: 4500 }
+      ];
+      
+      etapas.forEach(etapa => {
+        setTimeout(() => {
+          fill.style.width = `${etapa.p}%`;
+          percent.innerText = `${etapa.p}%`;
+          status.innerText = etapa.msg;
+          
+          if (etapa.p === 100) {
+            addLog(etapa.msg, "success");
+            finalizarScraper();
+          } else {
+            addLog(etapa.msg, "info");
+          }
+        }, etapa.time);
+      });
+    }
+
+    function addLog(text, type) {
+      const logs = document.getElementById("console-logs");
+      const now = new Date();
+      const timeStr = `[${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}]`;
+      
+      const line = document.createElement("div");
+      line.className = "log-line";
+      line.innerHTML = `
+        <span class="log-timestamp">${timeStr}</span>
+        <span class="log-text ${type}">${text}</span>
+      `;
+      logs.appendChild(line);
+      logs.scrollTop = logs.scrollHeight;
+    }
+
+    function finalizarScraper() {
+      setTimeout(() => {
+        // Exibir o grid de veículos com as fotos reais
+        const wrapper = document.getElementById("stock-wrapper");
+        const container = document.getElementById("stock-grid-container");
+        
+        container.innerHTML = "";
+        estoqueRecordeVeiculos.forEach(car => {
+          const card = document.createElement("div");
+          card.className = "car-card";
+          card.innerHTML = `
+            <div class="car-image-box">
+              <span class="car-badge-hd">HD FOTOS</span>
+              <img class="car-img" src="${car.foto}" alt="${car.modelo}">
+            </div>
+            <div class="car-info-box">
+              <span class="car-brand">${car.marca}</span>
+              <span class="car-model">${car.modelo}</span>
+              <div class="car-meta">
+                <span>${car.ano}</span>
+                <span>${car.km}</span>
+              </div>
+              <span class="car-price">${car.valor}</span>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+        
+        wrapper.style.display = "flex";
+        
+        // Habilitar controles novamente
+        document.getElementById("btn-scraper").disabled = false;
+        document.getElementById("shopcar-url").disabled = false;
+      }, 500);
+    }
+
+    // 6. Simulador do Celular (WhatsApp Simulator)
+    function simularMensagemCliente(textoCliente) {
+      const screen = document.getElementById("phone-chat-screen");
+      const typing = document.getElementById("phone-typing");
+      
+      // 1. Inserir mensagem do cliente
+      const now = new Date();
+      const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+      
+      const clientBubble = document.createElement("div");
+      clientBubble.className = "phone-msg-bubble sent";
+      clientBubble.innerHTML = `${textoCliente}<div class="phone-msg-time">${timeStr}</div>`;
+      
+      screen.appendChild(clientBubble);
+      screen.scrollTop = screen.scrollHeight;
+      
+      // 2. Mostrar indicador de digitando
+      typing.style.display = "block";
+      screen.scrollTop = screen.scrollHeight;
+      
+      // 3. Simular resposta da IA após 1.5s
+      setTimeout(() => {
+        typing.style.display = "none";
+        responderIA(textoCliente, timeStr);
+      }, 1500);
+    }
+
+    function responderIA(textoCliente, timeStr) {
+      const screen = document.getElementById("phone-chat-screen");
+      
+      let resposta = "";
+      let fotos = [];
+      
+      if (textoCliente.includes("Fusca")) {
+        resposta = "Sim, temos um <b>Fusca 1600 76/76 Branco</b> disponível! Restauro profissional completo, motor 100% revisado, tapeçaria nova e 94.000 Km rodados. Valor: <b>R$ 34.900,00</b>.<br><br>Gostaria que eu te enviasse as fotos dele por aqui? 😊";
+      } else if (textoCliente.includes("fotos")) {
+        resposta = "Claro! Aqui estão algumas fotos em HD do <b>Fusca 1600</b> diretamente do nosso pátio:";
+        fotos = [
+          "https://cdn.shopcar.com.br/stored/veiculos/1779126742_76197.jpg",
+          "https://cdn.shopcar.com.br/stored/veiculos/1779126742_84062.jpg"
+        ];
+      } else if (textoCliente.includes("Amarok")) {
+        resposta = "Temos sim! Uma excelente <b>VW Amarok Highline 2.0 TDi 4x4 Automática (2014)</b> na cor Prata. Ela está muito nova, com 221.600 Km rodados, bancos em couro, tração 4x4 e todas as revisões em dia. O preço dela é <b>R$ 83.900,00</b>.<br><br>Quer agendar uma visita para ver de perto ou simular as parcelas?";
+        fotos = [
+          "https://cdn.shopcar.com.br/stored/veiculos/1763559399_47856.jpg"
+        ];
+      }
+      
+      // Criar balão de texto da IA
+      const iaBubble = document.createElement("div");
+      iaBubble.className = "phone-msg-bubble received";
+      iaBubble.innerHTML = `${resposta}<div class="phone-msg-time">${timeStr}</div>`;
+      screen.appendChild(iaBubble);
+      
+      // Se houver fotos, criar os balões de imagem HD
+      fotos.forEach(fotoUrl => {
+        const imgBubble = document.createElement("div");
+        imgBubble.className = "phone-msg-image";
+        imgBubble.innerHTML = `
+          <img src="${fotoUrl}" class="phone-img-el" alt="Foto HD">
+          <div class="phone-img-caption">
+            <span>Assistente Comercial 🚘</span>
+            <div class="phone-msg-time" style="margin-left:0; margin-top:2px;">HD Foto</div>
+          </div>
+        `;
+        screen.appendChild(imgBubble);
+      });
+      
+      screen.scrollTop = screen.scrollHeight;
+    }
+  </script>
+</body>
+</html>

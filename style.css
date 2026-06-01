@@ -688,20 +688,92 @@ strong {
   align-items: flex-end;
 }
 
-.footer-signature {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.01em;
-}
-
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.03);
   padding-top: 2rem;
   font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.3);
+}
+
+/* 14. Seção de Preços (Pricing) */
+.pricing-section {
+  padding: 6rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.pricing-box {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 4.5rem;
+  border-color: rgba(212, 175, 55, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 40px rgba(212, 175, 55, 0.05);
+}
+
+.price-value {
+  margin: 2rem 0 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.price-currency {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.4rem;
+}
+
+.price-num {
+  font-size: 5.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text);
+}
+
+.price-period {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-left: 0.2rem;
+}
+
+.price-setup {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.pricing-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 2.5rem 0;
+}
+
+.pricing-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 3.5rem;
+}
+
+.p-feature {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  font-size: 1.05rem;
+  text-align: left;
+}
+
+.p-check {
+  color: var(--success);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.pricing-cta {
+  display: flex;
+  justify-content: center;
 }
 
 /* 13. Responsividade */
@@ -741,6 +813,10 @@ strong {
     padding: 4rem 1.5rem;
   }
   
+  .pricing-box {
+    padding: 3rem 1.5rem;
+  }
+  
   .footer-container {
     flex-direction: column;
     align-items: center;
@@ -749,12 +825,17 @@ strong {
   
   .footer-links {
     align-items: center;
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
   h1 {
     font-size: 2.2rem;
+  }
+  
+  .price-num {
+    font-size: 4rem;
   }
   
   .hero-proof {

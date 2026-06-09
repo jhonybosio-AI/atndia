@@ -100,8 +100,16 @@
       </div>
     </div>
 
-    <!-- Seção 2: Grid Principal -->
-    <div class="main-dashboard-grid">
+    <!-- Navegação em Abas (Tabs) -->
+    <div class="tabs-container">
+      <button class="tab-btn active" onclick="switchTab('onboarding')">⚙️ Onboarding da Loja</button>
+      <button class="tab-btn" onclick="switchTab('crm')">📊 CRM & Funil de Vendas</button>
+      <button class="tab-btn" onclick="switchTab('equipe')">👥 Gestão de Equipe (Round-Robin)</button>
+    </div>
+
+    <!-- Seção 2: Conteúdo das Abas -->
+    <div id="tab-onboarding" class="tab-content active">
+      <div class="main-dashboard-grid">
       
       <!-- Coluna da Esquerda: Controles, Scraper e Estoque -->
       <div class="dashboard-panel">
@@ -217,7 +225,100 @@
           </div>
         </div>
       </div>
-      
+      </div>
+    </div>
+
+    <!-- Aba 2: CRM & Funil de Vendas -->
+    <div id="tab-crm" class="tab-content" style="display: none;">
+      <div class="dashboard-panel">
+        <div class="panel-header" style="margin-bottom: 20px;">
+          <span class="panel-badge">ATNDIA CRM</span>
+          <h2 class="panel-title">Funil de Atendimento (Kanban)</h2>
+          <p class="panel-desc">Arraste e solte os leads entre as colunas para atualizar o status.</p>
+        </div>
+        
+        <div class="kanban-board">
+          <!-- Coluna 1 -->
+          <div class="kanban-column" id="kanban-novo" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="kanban-header">
+              <span class="kanban-title">Novo Lead</span>
+              <span class="kanban-count">2</span>
+            </div>
+            <div class="kanban-cards">
+              <!-- Cards via JS -->
+            </div>
+          </div>
+          
+          <!-- Coluna 2 -->
+          <div class="kanban-column" id="kanban-atendimento" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="kanban-header">
+              <span class="kanban-title" style="color: var(--primary);">Em Negociação</span>
+              <span class="kanban-count">1</span>
+            </div>
+            <div class="kanban-cards">
+              <!-- Cards via JS -->
+            </div>
+          </div>
+          
+          <!-- Coluna 3 -->
+          <div class="kanban-column" id="kanban-visita" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="kanban-header">
+              <span class="kanban-title" style="color: var(--warning);">Visita / Test-Drive</span>
+              <span class="kanban-count">1</span>
+            </div>
+            <div class="kanban-cards">
+              <!-- Cards via JS -->
+            </div>
+          </div>
+          
+          <!-- Coluna 4 -->
+          <div class="kanban-column" id="kanban-vendido" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="kanban-header">
+              <span class="kanban-title" style="color: var(--success);">Vendido</span>
+              <span class="kanban-count">0</span>
+            </div>
+            <div class="kanban-cards">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aba 3: Equipe de Vendedores -->
+    <div id="tab-equipe" class="tab-content" style="display: none;">
+      <div class="dashboard-panel">
+        <div class="panel-header" style="margin-bottom: 20px;">
+          <span class="panel-badge">ROTEAMENTO INTELIGENTE</span>
+          <h2 class="panel-title">Gestão de Vendedores (Round-Robin)</h2>
+          <p class="panel-desc">A IA do AtndIA distribuirá os leads automaticamente e de forma justa para os vendedores ativos nesta lista.</p>
+        </div>
+
+        <div class="team-management-grid">
+          <div class="team-list-box">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+              <h3 style="font-size: 14px; color: var(--text);">Vendedores Ativos na Fila</h3>
+              <button class="btn btn-primary" style="padding: 6px 12px; font-size: 12px;" onclick="adicionarVendedor()">+ Adicionar</button>
+            </div>
+            <div class="team-list" id="equipe-list">
+              <!-- Inserido via JS -->
+            </div>
+          </div>
+          
+          <div class="routing-preview-box">
+            <h3 style="font-size: 14px; color: var(--text); margin-bottom: 15px;">Próximo Lead vai para:</h3>
+            <div class="next-seller-highlight" id="next-seller-highlight">
+              <div class="user-avatar" style="width: 60px; height: 60px; font-size: 24px; margin: 0 auto 10px;">DV</div>
+              <h4 style="text-align: center; color: var(--primary); font-size: 18px;">Davi Silva</h4>
+              <p style="text-align: center; font-size: 12px; color: var(--text-dimmed);">WhatsApp: (16) 99111-2222</p>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 15px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); border-radius: 8px;">
+              <p style="font-size: 12px; color: var(--success); text-align: center;"><b>Regra Ativa:</b> Distribuição 1 por 1 (Equitativa).</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -461,9 +562,120 @@
     ];
 
     // 3. Inicialização de Dados na Tela
+    // Dados de Vendedores
+    const equipeData = [
+      { id: 1, nome: "Davi Silva", iniciais: "DV", telefone: "(16) 99111-2222", status: "Ativo" },
+      { id: 2, nome: "Edilson Souza", iniciais: "ED", telefone: "(16) 99222-3333", status: "Ativo" },
+      { id: 3, nome: "Jhony Bosio", iniciais: "JB", telefone: "(16) 99311-5079", status: "Pausado" }
+    ];
+
     document.addEventListener("DOMContentLoaded", () => {
       renderLeadsTable();
+      renderKanbanBoard();
+      renderEquipeList();
     });
+
+    // 3.1 Funções de Abas (Tabs)
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      document.getElementById('tab-' + tabId).style.display = 'block';
+      event.currentTarget.classList.add('active');
+    }
+
+    // 3.2 Funções do Kanban
+    function renderKanbanBoard() {
+      // Filtrar leads por status para as colunas
+      const cols = {
+        'kanban-novo': leadsData.filter(l => l.status === 'Aguardando CPF' || l.status === 'Troca em Avaliação'),
+        'kanban-atendimento': leadsData.filter(l => l.status === 'Ficha Pré-Aprovada'),
+        'kanban-visita': leadsData.filter(l => l.status === 'Visita Agendada'),
+        'kanban-vendido': []
+      };
+
+      for (const [colId, leads] of Object.entries(cols)) {
+        const container = document.getElementById(colId).querySelector('.kanban-cards');
+        container.innerHTML = '';
+        document.getElementById(colId).querySelector('.kanban-count').innerText = leads.length;
+
+        leads.forEach(lead => {
+          const card = document.createElement('div');
+          card.className = 'kanban-card';
+          card.draggable = true;
+          card.id = 'lead-card-' + lead.id;
+          card.ondragstart = drag;
+          card.onclick = () => abrirGavetaLead(lead.id);
+
+          // Escolher vendedor aleatorio para o mock
+          const idx = (lead.id % 2 === 0) ? 0 : 1;
+          const vendedor = equipeData[idx].nome;
+          const inics = equipeData[idx].iniciais;
+
+          card.innerHTML = `
+            <div class="kanban-card-header">
+              <span class="lead-name" style="font-size: 14px;">${lead.nome}</span>
+              <span class="status-badge ${lead.statusClass}" style="font-size: 8px; padding: 2px 6px;">${lead.status}</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-dimmed); margin-top: 5px;">🚗 ${lead.carro}</div>
+            <div style="margin-top: 10px; display: flex; align-items: center; gap: 5px; border-top: 1px solid var(--border); padding-top: 8px;">
+              <div class="user-avatar" style="width: 20px; height: 20px; font-size: 9px;">${inics}</div>
+              <span style="font-size: 10px; color: var(--text-muted);">${vendedor}</span>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      }
+    }
+
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      var dropZone = ev.target.closest('.kanban-column').querySelector('.kanban-cards');
+      dropZone.appendChild(document.getElementById(data));
+      // Atualiza contadores (Visual mock)
+      document.querySelectorAll('.kanban-column').forEach(col => {
+        col.querySelector('.kanban-count').innerText = col.querySelectorAll('.kanban-card').length;
+      });
+    }
+
+    // 3.3 Funções da Equipe
+    function renderEquipeList() {
+      const container = document.getElementById('equipe-list');
+      container.innerHTML = '';
+      equipeData.forEach(m => {
+        const item = document.createElement('div');
+        item.className = 'team-member-item';
+        const color = m.status === 'Ativo' ? 'var(--success)' : 'var(--text-dimmed)';
+        
+        item.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="user-avatar">${m.iniciais}</div>
+            <div>
+              <div style="font-family: var(--font-title); font-weight: 700; font-size: 14px;">${m.nome}</div>
+              <div style="font-size: 11px; color: var(--text-muted);">${m.telefone}</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 10px; font-weight: 700; color: ${color}; text-transform: uppercase;">${m.status}</span>
+            <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;">Editar</button>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function adicionarVendedor() {
+      alert("Painel de cadastro abrirá aqui!");
+    }
 
     function renderLeadsTable() {
       const tbody = document.getElementById("leads-tbody");

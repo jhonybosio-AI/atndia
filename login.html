@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AtndIA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="manager.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .login-container {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .logo-text {
+            font-family: var(--font-title);
+            font-size: 28px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        .logo-text span {
+            color: var(--primary);
+            text-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+        }
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-size: 14px;
+            font-family: var(--font-tech);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 700;
+            font-family: var(--font-tech);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 18px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+            box-sizing: border-box;
+        }
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent);
+            color: #0c0d12;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-title);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            margin-top: 10px;
+        }
+        .btn-primary:hover {
+            background: oklch(0.85 0.15 90);
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.45);
+        }
+        .error-msg {
+            color: var(--error);
+            font-family: var(--font-tech);
+            font-size: 12px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="logo-text">ATND<span>IA</span></div>
+    <div class="subtitle">Faça login para acessar o painel</div>
+
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" required placeholder="loja@exemplo.com">
+        </div>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" id="password" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-primary" id="btnSubmit">Entrar no Painel</button>
+        <div id="errorMsg" class="error-msg">Credenciais inválidas.</div>
+    </form>
+</div>
+
+<script>
+    const SUPABASE_URL = 'https://txhoigsjslqvypwlksbs.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_PfprHNlfDjlykRB53kxvGQ_y_2UJpXp';
+    
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    async function checkSession() {
+        const { data: { session } } = await supabaseClient.auth.getSession();
+        if (session) {
+            window.location.href = 'crm.html';
+        }
+    }
+    checkSession();
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const btn = document.getElementById('btnSubmit');
+        const errorMsg = document.getElementById('errorMsg');
+
+        btn.innerText = 'Autenticando...';
+        btn.disabled = true;
+        errorMsg.style.display = 'none';
+
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+        });
+
+        if (error) {
+            errorMsg.innerText = error.message === 'Invalid login credentials' ? 'Email ou senha inválidos' : error.message;
+            errorMsg.style.display = 'block';
+            btn.innerText = 'Entrar no Painel';
+            btn.disabled = false;
+        } else {
+            window.location.href = 'crm.html';
+        }
+    });
+</script>
+
+</body>
+</html>

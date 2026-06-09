@@ -100,8 +100,13 @@
                     <input type="file" id="csvFileInput" accept=".csv" style="width: 100%; padding: 5px 0; color: var(--text-muted);" />
                     <button class="btn btn-secondary" onclick="importCSV()" id="btnImportCSV" style="width: 100%;">Importar CSV</button>
                 </div>
+                <!-- Bloco Scraper SS Veículos -->
+                <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 10px; padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);">
+                    <h3 style="margin: 0; font-size: 15px; color: var(--primary); font-family: var(--font-display);">Sincronizar Site</h3>
+                    <p style="font-size: 11px; color: var(--text-muted); margin: 0;">Varre o site oficial (ssveiculos1) e atualiza o estoque.</p>
+                    <button class="btn btn-primary" onclick="importScraperSS()" id="btnImportSS" style="width: 100%; margin-top: auto;">Iniciar Sincronização</button>
+                </div>
             </div>
-
             <div class="leads-table-container">
                 <table class="leads-table">
                     <thead>
@@ -156,10 +161,11 @@
 <script>
     const SUPABASE_URL = 'https://txhoigsjslqvypwlksbs.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_PfprHNlfDjlykRB53kxvGQ_y_2UJpXp';
-    const BACKEND_URL = 'http://178.156.246.231:3000';
+    const BACKEND_URL = window.location.origin;
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     let currentUser = null;
+    let currentToken = null;
     let currentLeads = [];
 
     async function checkAuth() {
@@ -168,6 +174,7 @@
             window.location.href = 'login.html';
         } else {
             currentUser = session.user;
+            currentToken = session.access_token;
             document.getElementById('userEmail').innerText = currentUser.email;
             document.getElementById('userInitial').innerText = currentUser.email.charAt(0).toUpperCase();
             
@@ -246,7 +253,11 @@
         const loader = document.getElementById('qrLoader');
 
         try {
-            const res = await fetch(`${BACKEND_URL}/api/status`);
+            const res = await fetch(`${BACKEND_URL}/api/status`, {
+                headers: {
+                    'Authorization': `Bearer ${currentToken}`
+                }
+            });
             const data = await res.json();
 
             loader.style.display = 'none';
@@ -422,6 +433,34 @@
         else fetchStock();
     }
 
+    async function importScraperSS() {
+        const btn = document.getElementById('btnImportSS');
+        btn.innerText = 'Buscando...';
+        btn.disabled = true;
+
+        try {
+            const res = await fetch(`${BACKEND_URL}/api/import-scraper-ss`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${currentToken}`
+                }
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert(`Sucesso! ${data.count} veículos importados/atualizados.`);
+                loadStock();
+            } else {
+                alert('Erro ao sincronizar: ' + data.error);
+            }
+        } catch (err) {
+            alert('Erro de conexão ao sincronizar o scraper.');
+        } finally {
+            btn.innerText = 'Iniciar Sincronização';
+            btn.disabled = false;
+        }
+    }
+
     async function importXML() {
         const url = document.getElementById('xmlUrlInput').value.trim();
         if (!url) {
@@ -436,7 +475,10 @@
         try {
             const res = await fetch(`${BACKEND_URL}/api/import-stock`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${currentToken}`
+                },
                 body: JSON.stringify({ url })
             });
             const data = await res.json();
@@ -473,7 +515,10 @@
             try {
                 const res = await fetch(`${BACKEND_URL}/api/import-stock-csv`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${currentToken}`
+                    },
                     body: JSON.stringify({ csvData: csvText })
                 });
                 const data = await res.json();
